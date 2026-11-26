@@ -180,6 +180,48 @@ On the prediction side, the costs fall unevenly. The backtest (Appendix A) gave 
 The previous section left open whether switching off cloud backup (<code>allowBackup="false"</code>) was the right call. It protects privacy under 3.12, but if the phone is lost, every record goes with it unless the user exported a backup. Utilitarianism supports keeping backup off. A breach of a cloud copy, or a subpoena for it, would be severe and would fall hardest on users in states that criminalise abortion (Kelly & Habib, 2023; Zadushlivy et al., 2025). The harm of data loss, on the other hand, can be reduced by reminding users to export. Kant points the same way. The export flow already treats users as ends who can judge their own risk: it offers a passphrase before anything is saved (Figure 1) and leaves the choice to them.
 </p>
 
+### Tension 2: Competence against independence
+
+<p style="text-align: justify;">
+Clause 2.01 points to clinical review, which a solo developer cannot afford, and without that compromise the app would not exist. We look at this tension through virtue ethics, which asks what Selene’s design choices say about the developer, and through Rawls’ justice as fairness, which asks who carries the cost of those choices.
+</p>
+
+<p style="text-align: justify;">
+<b>Virtue ethics.</b> Aristotle (2009, Book II) treats each virtue as a mean between excess and deficiency, guided by practical wisdom. For competence the relevant virtue is humility (Vallor, 2016). Its excess is overreach: labelling cycle phases “Follicular” and “Luteal” by default and offering a “Drug Interaction Checker” across about 5,600 openFDA drugs, without the clinical expertise those names imply. Its deficiency is timidity: not building privacy-respecting health software at all, which leaves users with the trackers Zadushlivy et al. (2025) criticise. Selene lands on both sides. Ignoring biomarkers, keeping the ovulation estimate off by default (Figure 6) and showing users their own error rate (Figure 7) are humble choices, and honest ones too. The default phase labels and clinical feature names are not. This narrows Part 1’s competence charge: building the app was defensible, but parts of it speak with more authority than the developer has.
+</p>
+
+<p style="text-align: justify;">
+<b>Justice as fairness.</b> Rawls (1971) asks which rules people would choose behind a “veil of ignorance”, not knowing their own place. His Difference Principle allows an inequality only if it benefits the least advantaged. Here those are users with irregular cycles from PMOS or endometriosis, users with genuinely short cycles, and users in hostile jurisdictions. The privacy design passes easily, since it helps those in hostile jurisdictions most. The prediction model creates a clear inequality: regular users get a window that is right 85.3% of the time and withheld 5.2% of the time, while irregular users get 47.7% and 63.7% (Appendix A). Part 1 called the “too irregular” result a way of discarding biological variance. Rawls lets us test that claim by asking whether the alternative helps the worst-off. A wider window that is wrong half the time would not. The user’s own figures and a referral to a clinician arguably do, and accuracy for irregular users rises to 70.9% after 13 cycles. Behind the veil, a person could accept the 14-day cutoff. Two other inequalities fail the test, because they burden the worst-off and give them nothing back. Irregular users see the same “four out of five” sentence as everyone else, although it holds for them only about half the time. Cycles under 15 days are also dropped without notice (Figure 8), so a user with genuinely short cycles is treated as if they had mistyped a date.
+</p>
+
+<p style="text-align: justify;">
+<b>Comparison and limits.</b> Both theories accept that the app should exist, and both object to the confidence wording. They object for different reasons. Virtue ethics faults the clinical vocabulary even where no one is harmed, because it misrepresents the developer’s competence, while Rawls cares about labels only when their cost falls on the worst-off. Rawls also answers the Justice Problem that Babacar raised for utilitarianism, since it looks at who carries the cost as well as how large the total is. Virtue ethics runs into the Vagueness Problem here: “be humble” does not tell the developer where the 14-day cutoff should sit. Rawls wrote his theory for the basic institutions of society rather than for an app, and in Selene’s case the least advantaged groups can want opposite things. A duress wipe would protect users in hostile jurisdictions, but it could also destroy the records a user with PMOS needs to show a clinician.
+</p>
+
+### Tension 3: Ethical responsibility against legal liability
+
+<p style="text-align: justify;">
+Clause 1.01 asks engineers to “accept full responsibility for their own work”, yet the MIT licence disclaims all liability. Babacar’s Kantian analysis found that the combined maxim of medical language, no private redress and no liability fails universalisation. We set this against the ethics of care.
+</p>
+
+<p style="text-align: justify;">
+<b>Ethics of care.</b> Noddings (1984), building on Gilligan (1982), describes care as a relationship between the “one-caring” and the “cared-for”. It needs attention to the other’s needs (engrossment) and is complete only when the cared-for can receive and respond to it (Sander-Staudt, n.d.). The relationship here is unequal. The user trusts the developer with records the app calls “the most sensitive thing Selene stores” (Figure 3), cannot inspect the model, and may live where those records can be used against them (Kelly & Habib, 2023). Our Part 2 testing found real care in the design. The passphrase prompt comes before a backup is saved (Figure 1), lock-screen notifications are hidden by default, and the “too irregular” screen “must never be a dead end” (<code>intervals.dart</code>). Care breaks down at the three points where the Decentralisation Paradox moves burdens onto users. The model is checked only against synthetic users (<code>synthetic.py</code>), so clinical validation falls to the real users who rely on it. The lock is off by default (Figure 2), so users must find their own protection against forensic access. Redress is left to them entirely: the only route is public GitHub Issues, and a user whose “late period” reminder never arrives (Figures 10 and 11) has no private way to say so. In Noddings’ terms, Selene <i>cares about</i> its users through its design but cannot <i>care for</i> them, because no relationship exists once the APK is installed. Part 1 said the developer abandons users. We would now put it more narrowly: the architecture leaves users alone at the points where they depend on it most, whatever the developer intended.
+</p>
+
+<p style="text-align: justify;">
+<b>Comparison and limits.</b> Kant and care ethics agree that public-only redress is wrong, but they place the fault in different places. Kant faults the developer’s maxim, which points to changing the rule he follows. Care ethics faults the missing relationship, which points to giving users a way to be heard without handing over their data. Virtue ethics adds that responsibility, like clinical review, cannot be fully practised by one person, so part of the gap comes with solo development. Care ethics also has a limit the module itself names: it is possible to care about everyone but not to care for everyone. One volunteer cannot keep up a caring relationship with thousands of unknown users, so the theory is better at explaining where care fails than at deciding who is to blame.
+</p>
+
+### Comparing the theories
+
+| Issue | Utilitarianism | Kant | Virtue ethics | Care ethics | Rawls |
+|---|---|---|---|---|---|
+| Offline, encrypted storage (3.12) | Strongly positive | Treats users as ends | Courage, honesty | Caring, but lock off by default | Benefits least advantaged most |
+| 14-day prediction cutoff (1.07) | Defensible | No violation | Humility | Caring (“never a dead end”) | Justified |
+| “Four out of five” wording, default phase labels (6.07) | Net harm for irregular users | Violates truthfulness | Overreach (lack of humility) | Misleads the dependent party | Burdens the worst-off |
+| Cycles under 15 days dropped silently (1.07, 6.07) | Cheap fix, so should be fixed | Withholds relevant truth | Unfair | Cared-for not informed | Unjustified |
+| MIT licence and public-only redress (1.01, 6.08) | Not assessed | Combined maxim fails | Deficient responsibility | Abandonment by architecture | Not assessed |
+
 ## Critical Reflection
 
 <p style="text-align: justify;">

@@ -54,7 +54,7 @@ Selene is developed and maintained by Mahmoud Sallam under the Proteus-Nell/Sele
 </p>
 
 <p style="text-align: justify;">
-<b>Evidence.</b> The release build removes the internet permission (<code>AndroidManifest.xml</code>), and according to the README, a release cannot be built if the APK asks for network access. We checked the APK we actually installed to confirm this. It asks for notification, alarm, boot, biometric and vibration permissions, but not for internet or network access, and cloud backup is switched off (<code>allowBackup="false"</code>) (Appendix B). In Part 1 we desc ribed a plaintext SQLite database. That is no longer the case: the database is now encrypted, with the key kept in Android’s secure key store. When we tried to export a backup, the app first asked whether we wanted a passphrase, and “Protect and save” was the main button (Figure 1). Lock-screen notifications hide their content by default. The app lock (“Require unlock”) is off by default, though (Figure 2). This is the same app whose first screen calls intercourse records “the most sensitive thing Selene stores” (Figure 3).
+<b>Evidence.</b> The release build removes the internet permission (<code>AndroidManifest.xml</code>), and according to the README, a release cannot be built if the APK asks for network access. We checked the APK we actually installed to confirm this. It asks for notification, alarm, boot, biometric and vibration permissions, but not for internet or network access, and cloud backup is switched off (<code>allowBackup="false"</code>) (Appendix B). In Part 1 we described a plaintext SQLite database. That is no longer the case: the database is now encrypted, with the key kept in Android’s secure key store. When we tried to export a backup, the app first asked whether we wanted a passphrase, and “Protect and save” was the main button (Figure 1). Lock-screen notifications hide their content by default. The app lock (“Require unlock”) is off by default, though (Figure 2). This is the same app whose first screen calls intercourse records “the most sensitive thing Selene stores” (Figure 3).
 </p>
 
 <table align="center"><tr><td align="center" valign="top"><b>Figure 1</b><br><i>Passphrase prompt shown when exporting a backup</i><br><img src="figures/figure1.jpeg" width="220"></td><td align="center" valign="top"><b>Figure 2</b><br><i>The "Require unlock" app lock, off by default</i><br><img src="figures/figure2.jpeg" width="220"></td><td align="center" valign="top"><b>Figure 3</b><br><i>Onboarding notice on recording intercourse</i><br><img src="figures/figure3.jpeg" width="220"></td></tr></table>
@@ -245,19 +245,33 @@ Clause 1.01 asks engineers to “accept full responsibility for their own work�
 ## Critical Reflection
 
 <p style="text-align: justify;">
-
+As we delved through the codebase, independently tested it and interpreted the developer's justifications, we came to the understanding that varying SE Code come into direct contradiction when dealing with real-life projects, highlighting tensions between privacy (3.12) and data loss, competence (2.01) and development independence, in addition to full responsibility or lack therefore (1.01 & 6.08) in tandem with open-source licensing.
 </p>
+
+<p style="text-align: justify;">
+Introducing ethical theories allowed us to resolve some of the disputes, however it also highlighted further conflicts betwen them. A prime example pertains to the one of the core design decisions of retaining all information locally, thus protecting users against subpoena's on the developer when it pertains to their data. However, in doing so it exposed a version of Utilitarianism's Calculation Problem (Quinn, 2020) which highlighted the lack of telemetry that is collected by the application, this becomes an issue when said telemetry is needed for bug reports and maintenance logs, which becomes increasingly more important due to the nature of the application.
+</p>
+
+<p style="text-align: justify;">
+Ontop of that, having the SE Code (1.04) and Kantian Deontology align with Selene's plain disclosure mechanisms, while retaining the rule-based honesty minimised the level of care and character present which went against the Ethics of Care theory.
+</p>
+
+<p style="text-align: justify;">
+All in all, these tensions provided us with a new perspective on professional responsibility in software engineering. Where ethical practice should be seen as more of a proactive measure and approach instead of a bureaucratic process that requires a set of conditions to be met. Furthermore, when lone developers aim to break into the health software sphere, they may be encumbered with the expensive clinical certification and the need to sustain personal care relationships with thousands of anonymous users. This does not necessarily come from a place of neglect or malicious but is shaped based on the current sociopolitical sphere and laws that are set.
 
 ## Recommendations for Improving Ethical Standing
 
 <p style="text-align: justify;">
-
+The following recommendations are aimed at retaining Selene's intended design and target demographic while realistically addressing the aforementioned theoretical tensions and stated issues.
 </p>
 
-## References
-
-<p style="padding-left: 2em; text-indent: -2em;">
+1. <p style="text-align: justify;"> <b>Resolve the Notification/Reminder Synchronisation Bug:</b> Have Selene read the live OS permission state on launch and while browsing through the in-app settings and have it display warning prompt in order to inform the users of the issue. Doing so mitigates avoidable anxienty over potentially missed period alerts and furthers responsible engineering care which is within both Utilitarianism and Ethics of Care.
 </p>
+
+2. <p style="text-align: justify;"> <b> Implement a Private Route for Reporting Bugs/Features:</b> Adding the ability for users to be able to provide bug reports and diagnostic data without necesitating the need for network permission allows for the Ethics of Care theory to be resolved as the "cared-for" will now possess a safe way to respond and higlight issues when they arise.
+</p>
+
+3. <p style="text-align: justify;"> <b> Provide an Initial Prompt for App Locking & Periodic Backups: </b> During the process of on-boarding, include the option for users to be able to toggle the "Require unlock" option on while also providing them with an optional local reminder to export a passphrase-protected backup. This improves the data retention and reliability which pertains to Utilitarianism, retains the user's informed decision under Kant's Formula of Humanity and narrows the gap between "caring about" and "caring for" the users under the Ethics of Care.
 
 ## Appendix A: Backtest of the prediction model
 

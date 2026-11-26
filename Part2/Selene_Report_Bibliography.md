@@ -21,6 +21,17 @@ Kelly, B. G., & Habib, M. (2023). Missed period? The significance of period-trac
 Keutzer, L., & Simonsson, U. S. (2020). Medical Device Apps: An Introduction to Regulatory Affairs for Developers. JMIR mHealth and uHealth, 8(6), e17567. <https://doi.org/10.2196/17567>
 
 Mill, J. S. (1863). Utilitarianism. Parker, Son, and Bourn.
+Aristotle. (2009). The Nicomachean ethics (D. Ross, Trans.; L. Brown, Ed.). Oxford University Press.
+
+Gilligan, C. (1982). In a different voice: Psychological theory and women’s development. Harvard University Press.
+
+Noddings, N. (1984). Caring: A feminine approach to ethics and moral education. University of California Press.
+
+Rawls, J. (1971). A theory of justice. Harvard University Press.
+
+Sander-Staudt, M. (n.d.). Care ethics. In Internet Encyclopedia of Philosophy. https://iep.utm.edu/care-ethics/
+
+Vallor, S. (2016). Technology and the virtues: A philosophical guide to a future worth wanting. Oxford University Press.
 
 Quinn, M. J. (2020). Ethics for the information age (8th ed.). Pearson.
 

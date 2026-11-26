@@ -14,15 +14,36 @@ Users are able to log their menstrual flow, symptoms, chronic conditions, intima
 Selene is aimed primarily towards privacy-conscious menstruating users, including but not limited to users in anti-abortion jurisdictions, patients with neuroendocrinological disorders (such as PMOS/PCOS, Endometriosis). Selene may be of interest to the aforementioned target audience due to the routine dissemination and marketing of user data (including Personally Identifiable Information) to data brokers by commercially available Period Tracking Applications (PTAs) (Zadushlivy et al., 2025).
 </p>
 
-<p style="text-align: justify;">
-
-</p>
-
 ## Involved Stakeholders
 
-<p style="text-align: justify;">
-
+<p style="text-align: justify;"> 
+Selene affects several stakeholders/groups based on its design choice and intended audience, particularly relating to menstruating individuals and especially ones whom do not wish to share their data with data brokers.
 </p>
+
+### 2.1 Direct Users
+
+1. **Privacy Focused Users**: <p style="text-align: justify;"> Users who desire to not have either their personally identifiable information (PII) or their marketable information sold to data brokers. Selene does that by stripping internet access from the app and does not process or possess any information which can be verified due to its open-source nature. </p>
+2. **Users in countries that do not support reproductive care**: <p style="text-align: justify;"> Selene aims to combat this by encrypting the stored data, however it cannot defeat available forensic extraction methods to national entities such as Cellebrite. </p>
+
+### 2.2 Operating Entity & Developer
+
+<p style="text-align: justify;"> 
+Selene is developed and maintained by Mahmoud Sallam under the Proteus-Nell/Selene repository. Selene circumvents GDPR Data Controller responsibilites and CCPA/Washington consumer health data scope through the omission of key features that would otherwise benefit the project, such as exclusion of biomarkers in the menstrual cycle prediction.
+</p>
+
+<p style="text-align: justify;"> Selene lacks the support of clinically-compentent staff due to a lack of resources and manpower, further underpinning the infancy of the project.
+
+### 2.3 Data Providers
+
+<p style="text-align: justify;"> Selene bundles data from the Food and Drug Administration (FDA) through their openFDA datasets and the National Center for Complementary and Integrative Health (NCCIH).
+</p>
+
+<p style="text-align: justify;"> Selene utilises GitHub its development platform of choice for storing, tracking, and code collaboration. Additionally, DuckDuckGo is used for medication interaction browser handoffs when users would like verify that their medication does not interact negatively.
+</p>
+
+### 2.4 Indirect Stakeholders
+
+<p style="text-align: justify;"> Intimate partners and potential offspring are considered as indirect shareholders due to the information stored by the direct users either pertaining to them directly or resulting in decisions regarding them; as sexual intimacy on a given day is an toggleable option that may be recorded for the user, while medication usage and ovulation tracking is directly involved in the process of procreation.
 
 ## Analysis of Ethical Issues using the SE Code of Ethics
 
@@ -33,13 +54,12 @@ Selene is aimed primarily towards privacy-conscious menstruating users, includin
 </p>
 
 <p style="text-align: justify;">
-<b>Evidence.</b> The release build removes the internet permission (<code>AndroidManifest.xml</code>), and according to the README, a release cannot be built if the APK asks for network access. We checked the APK we actually installed to confirm this. It asks for notification, alarm, boot, biometric and vibration permissions, but not for internet or network access, and cloud backup is switched off (<code>allowBackup="false"</code>) (Appendix B). In Part 1 we described a plaintext SQLite database. That is no longer the case: the database is now encrypted, with the key kept in Android’s secure key store. When we tried to export a backup, the app first asked whether we wanted a passphrase, and “Protect and save” was the main button (Figure 1). Lock-screen notifications hide their content by default. The app lock (“Require unlock”) is off by default, though (Figure 2). This is the same app whose first screen calls intercourse records “the most sensitive thing Selene stores” (Figure 3).
+<b>Evidence.</b> The release build removes the internet permission (<code>AndroidManifest.xml</code>), and according to the README, a release cannot be built if the APK asks for network access. We checked the APK we actually installed to confirm this. It asks for notification, alarm, boot, biometric and vibration permissions, but not for internet or network access, and cloud backup is switched off (<code>allowBackup="false"</code>) (Appendix B). In Part 1 we desc ribed a plaintext SQLite database. That is no longer the case: the database is now encrypted, with the key kept in Android’s secure key store. When we tried to export a backup, the app first asked whether we wanted a passphrase, and “Protect and save” was the main button (Figure 1). Lock-screen notifications hide their content by default. The app lock (“Require unlock”) is off by default, though (Figure 2). This is the same app whose first screen calls intercourse records “the most sensitive thing Selene stores” (Figure 3).
 </p>
 
 <table align="center"><tr><td align="center" valign="top"><b>Figure 1</b><br><i>Passphrase prompt shown when exporting a backup</i><br><img src="figures/figure1.jpeg" width="220"></td><td align="center" valign="top"><b>Figure 2</b><br><i>The "Require unlock" app lock, off by default</i><br><img src="figures/figure2.jpeg" width="220"></td><td align="center" valign="top"><b>Figure 3</b><br><i>Onboarding notice on recording intercourse</i><br><img src="figures/figure3.jpeg" width="220"></td></tr></table>
 
-<p style="text-align: justify;">
-<b>Reasoning.</b> Clause 3.12 asks engineers to “work to develop” software that respects privacy, and moving from plaintext to encrypted storage is exactly that kind of work. We were also surprised by how open the in-app privacy statement is about its own limits. It says encryption “does not protect an unlocked phone” and that a forensic tool “may be able to use the key the way the app does” (Figure 4). That fits clause 1.04, which asks engineers to disclose “any actual or potential danger to the user”. The default is what holds the rating back. If the user never finds the lock setting, anyone holding the unlocked phone can open the app and read intimate and health records. Given the sensitivity of such records, the consequences of exposure could extend beyond ordinary data breaches and potentially place users at legal or personal risk. There is still no duress PIN or emergency wipe either. So the forensic risk from Part 1 has been explained to users, but it has not gone away.
+<p style="text-align: justify;"><b>Reasoning.</b> Clause 3.12 asks engineers to “work to develop” software that respects privacy, and moving from plaintext to encrypted storage is exactly that kind of work. We were also surprised by how open the in-app privacy statement is about its own limits. It says encryption “does not protect an unlocked phone” and that a forensic tool “may be able to use the key the way the app does” (Figure 4). That fits clause 1.04, which asks engineers to disclose “any actual or potential danger to the user”. The default is what holds the rating back. If the user never finds the lock setting, anyone holding the unlocked phone can open the app and read intimate and health records. Given the sensitivity of such records, the consequences of exposure could extend beyond ordinary data breaches and potentially place users at legal or personal risk. There is still no duress PIN or emergency wipe either. So the forensic risk from Part 1 has been explained to users, but it has not gone away.
 </p>
 
 <table align="center"><tr><td align="center" valign="top"><b>Figure 4</b><br><i>In-app privacy statement on encryption and its limits</i><br><img src="figures/figure4.jpeg" width="220"></td></tr></table>
@@ -135,9 +155,9 @@ Selene is aimed primarily towards privacy-conscious menstruating users, includin
 We ran into three tensions that the SE Code cannot settle on its own, and we leave them to the next section, on ethical theory.
 </p>
 
-1. <b>Privacy against data loss.</b> Switching off cloud backup protects privacy under 3.12. It also means that if the phone is lost, every record goes with it unless the user exported a backup. The Code does not say which harm matters more.
-2. <b>Competence against independence.</b> Clause 2.01 asks engineers to stay within their competence, which suggests clinical review. A solo developer cannot afford clinical validation or certification, and without that compromise the app would not exist.
-3. <b>Ethical responsibility versus legal liability.</b> Clause 1.01 asks engineers to “accept full responsibility for their own work”, but the MIT licence disclaims all liability. The Code gives no guidance on how a volunteer maintaining free health software should weigh the two.
+1. <p style="text-align: justify;"> <b>Privacy against data loss.</b> Switching off cloud backup protects privacy under 3.12. It also means that if the phone is lost, every record goes with it unless the user exported a backup. The Code does not say which harm matters more. </p>
+2. <p style="text-align: justify;"><b>Competence against independence.</b> Clause 2.01 asks engineers to stay within their competence, which suggests clinical review. A solo developer cannot afford clinical validation or certification, and without that compromise the app would not exist.</p>
+3. <p style="text-align: justify;"><b>Ethical responsibility versus legal liability.</b> Clause 1.01 asks engineers to “accept full responsibility for their own work”, but the MIT licence disclaims all liability. The Code gives no guidance on how a volunteer maintaining free health software should weigh the two.</p>
 
 
 ## Application of Selected Ethical Theories
